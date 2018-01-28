@@ -18,14 +18,24 @@ router.get('/main', async ctx => {
 
 app.use(router.routes());
 const server = app.listen(4001);
+let count = 0;
 let socketIO = require('socket.io'),
 	io = socketIO(server);
- io.on('connection', (socket) => {
-     console.log('a user connected');
+	 io.on('connection', (socket) => {
+	    count++;
+	    console.log(count + 'user connected');
 
-	 io.emit('message', `test connected.`);
+		 socket.on('disconnect', () => {
+		    console.log(`user disconnected`);
+		 });
 
- });
+		 socket.on('chat message', function(msg){
+		 	io.emit('chat message', msg);
+			 console.log('message: ' + msg);
+		 });
+
+
+	 });
 
 hub.listen();
 
