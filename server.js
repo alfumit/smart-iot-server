@@ -11,22 +11,27 @@ handlers.forEach(handler => require('./handlers/' + handler).init(app));
 let Hub = require("node-xiaomi-smart-home").Hub,
     hub = new Hub();
 
-router.get('/', require('./routes/homepage').get);
+// router.get('/', require('./routes/homepage').get);
 router.get('/main', async ctx => {
    ctx.body = `Hey this is the main page ${JSON.stringify(motionData)}`;
 });
 
 app.use(router.routes());
 const server = app.listen(4001);
-let count = 0;
+let count = 0, users = [];
 let socketIO = require('socket.io'),
 	io = socketIO(server);
 	 io.on('connection', (socket) => {
 	    count++;
-	    console.log(count + 'user connected');
+	    socket.on('new user', (msg) => {
+	    	users.push(msg);
+		    io.emit('user registered', msg);
+	    });
+
+		 console.log(count + 'user connected');
 
 		 socket.on('disconnect', () => {
-		    console.log(`user disconnected`);
+		    io.emit("user disconnected");
 		 });
 
 		 socket.on('chat message', function(msg){
