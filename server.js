@@ -2,6 +2,7 @@ const fs = require('fs'),
     path = require('path'),
     Koa = require('koa'),
     Router = require('koa-router'),
+	mongoose = require('mongoose'),
     app = module.exports = new Koa(),
     router = new Router();
 
@@ -18,7 +19,8 @@ router.get('/main', async ctx => {
 
 app.use(router.routes());
 const server = app.listen(4001);
-let count = 0, users = [];
+let count = 0, users = [], usersTyping = [];
+
 let socketIO = require('socket.io'),
 	io = socketIO(server);
 	 io.on('connection', (socket) => {
@@ -39,7 +41,16 @@ let socketIO = require('socket.io'),
 			 console.log('message: ' + msg);
 		 });
 
-
+		 socket.on('user typing', (msg) => {
+		 	if(usersTyping.indexOf(msg.user) === -1) usersTyping.push(msg.user);
+		 	setTimeout(() => {
+		 		if(usersTyping.indexOf(msg.user) !== -1) {
+				    usersTyping.splice(usersTyping.indexOf(msg.user), 1);
+			    }
+		    }, 5000);
+		 	io.emit('user typing notification', usersTyping);
+		 });
+		 
 	 });
 
 hub.listen();
