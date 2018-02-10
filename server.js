@@ -14,7 +14,7 @@ const hub = new Hub();
 
 // router.get('/', require('./routes/homepage').get);
 router.get('/main', async (ctx) => {
-   ctx.body = `Hey this is the main page ${JSON.stringify(motionData)}`;
+   ctx.body = `Hey this is the main page `;
 });
 
 app.use(router.routes());

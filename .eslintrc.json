@@ -6,7 +6,8 @@
   "extends": ["eslint:recommended", "google"],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "rules": {
     "semi": 2

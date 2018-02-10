@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "nodemon server.js"
   },
   "author": "",
@@ -22,11 +22,14 @@
     "koa-static": "^4.0.2",
     "mongoose": "^4.13.7",
     "node-xiaomi-smart-home": "^1.0.0",
+    "request": "^2.83.0",
     "socket.io": "^2.0.4",
     "socket.io-redis": "^5.2.0"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.17.0",
-    "eslint-config-google": "^0.9.1"
+    "eslint-config-google": "^0.9.1",
+    "mocha": "^5.0.0"
   }
 }
