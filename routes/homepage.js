@@ -68,7 +68,7 @@ exports.get = async function(ctx, next) {
                     });
                     
                     socket.on('user registered', (msg) => {
-                    	$('#notification').text('User '+ msg + ' registered');
+                    	$('#notification').text('User '+ msg.user + ' registered');
                     })
                 </script>
             </body>

@@ -1,4 +1,4 @@
 module.exports = {
   secret: 'mysecret',
-  root: process.cwd()
+  root: process.cwd(),
 };

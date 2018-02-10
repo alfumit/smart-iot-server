@@ -13,7 +13,7 @@ let sessionStore = require('./sessionStore');
 function socket(server) {
 	let io = socketIO(server);
 
-	io.adapter(socketRedis({ host: 'localhost', port: 6379 }));
+	io.adapter(socketRedis({host: 'localhost', port: 6379}));
 
 	io.use(function(socket, next) {
 		let handshakeData = socket.request;
@@ -23,15 +23,14 @@ function socket(server) {
 		let sid = 'koa:sess:' + cookies.get('sid');
 
 		co(function* () {
-
 			let session = yield* sessionStore.get(sid, true);
 
 			if (!session) {
-				throw new Error("No session");
+				throw new Error('No session');
 			}
 
 			if (!session.passport && !session.passport.user) {
-				throw new Error("Anonymous session not allowed");
+				throw new Error('Anonymous session not allowed');
 			}
 
 			// if needed: check if the user is allowed to join
@@ -56,24 +55,22 @@ function socket(server) {
 						yield* sessionStore.save(sid, session);
 					}
 				}).catch(function(err) {
-					console.error("session clear error", err);
+					console.error('session clear error', err);
 				});
 			});
-
 		}).then(function() {
 			next();
 		}).catch(function(err) {
 			console.error(err);
-			next(new Error("Error has occured."));
+			next(new Error('Error has occured.'));
 		});
-
 	});
 
-	io.on('connection', function (socket) {
+	io.on('connection', function(socket) {
 		io.emit('message', `${socket.user.displayName} connected.`);
 
 		socket.emit('message', 'hello', function(response) {
-			console.log("delivered", response);
+			console.log('delivered', response);
 		});
 
 		socket.on('typing', (status) => {
@@ -94,7 +91,7 @@ function socket(server) {
 
 
 let socketEmitter = require('socket.io-emitter');
-let redisClient = require('redis').createClient(/*{localhost, 6379}*/);
+let redisClient = require('redis').createClient(/* {localhost, 6379}*/);
 socket.emitter = socketEmitter(redisClient);
 
 module.exports = socket;

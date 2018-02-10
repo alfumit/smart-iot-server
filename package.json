@@ -24,5 +24,9 @@
     "node-xiaomi-smart-home": "^1.0.0",
     "socket.io": "^2.0.4",
     "socket.io-redis": "^5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-google": "^0.9.1"
   }
 }
