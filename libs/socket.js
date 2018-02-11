@@ -1,14 +1,20 @@
+/**
+ * A module containing all socket.io functionality
+ * @module socket.js
+ */
 let config = require('config');
-let mongoose = require('mongoose');
+// let mongoose = require('mongoose');
 let socketIO = require('socket.io');
 let socketRedis = require('socket.io-redis');
 // let User = require('models/user');
 
-mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/test');
-console.log(mongoose);
+// mongoose.Promise = Promise;
+// mongoose.connect('mongodb://localhost/test');
+// console.log(mongoose);
+
 /**
- * A module containing all socket.io functionality
+ * A function that accepts a server that's currently run and attaches
+ * socjet.io to it
  * @param {object} server - koa server application
  */
 function socketApp(server) {

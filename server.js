@@ -2,10 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const Koa = require('koa');
 const Router = require('koa-router');
-const	mongoose = require('mongoose');
+const mongoose = require('./libs/mongoose');
 const app = module.exports = new Koa();
 const router = new Router();
 const socketApp = require('./libs/socket');
+
+app.keys = ['trytoguessmeright'];
 
 const handlers = fs.readdirSync(path.join(__dirname, 'handlers')).sort();
 handlers.forEach((handler) => require('./handlers/' + handler).init(app));
