@@ -1,3 +1,4 @@
+const config = require('config');
 const session = require('koa-session');
 const mongooseStore = require('koa-session-mongoose');
 
@@ -7,7 +8,7 @@ const sessionStore = mongooseStore.create({
 });
 
 const CONFIG = {
-  key: 'koa:sess',
+  key: config.secret,
   maxAge: 86400000,
   overwrite: true, /** (boolean) can overwrite or not (default true) */
   httpOnly: true, /** (boolean) httpOnly or not (default true) */

@@ -3,14 +3,8 @@
  * @module socket.js
  */
 let config = require('config');
-// let mongoose = require('mongoose');
 let socketIO = require('socket.io');
 let socketRedis = require('socket.io-redis');
-// let User = require('models/user');
-
-// mongoose.Promise = Promise;
-// mongoose.connect('mongodb://localhost/test');
-// console.log(mongoose);
 
 /**
  * A function that accepts a server that's currently run and attaches
