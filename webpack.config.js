@@ -1,4 +1,8 @@
 const config = {
+  entry: './routes/homepage.js',
+  output: {
+    filename: './routes/hh1.js',
+  },
   module: {
     loaders: [
       {
