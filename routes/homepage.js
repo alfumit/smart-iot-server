@@ -1,5 +1,9 @@
 
 exports.get = async function(ctx, next) {
+    let count = ctx.session.count || 0;
+    let sessionUserName = ctx.session.userName;
+    ctx.session.count = ++count;
+
     ctx.body = `
     <!doctype html>
     <html>
@@ -15,7 +19,7 @@ exports.get = async function(ctx, next) {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col">
-                        <h1>Socket IO chat</h1>
+                        <h1>Socket IO chat + ${count}</h1>
                     </div>
                 </div>
                 <div class="row">

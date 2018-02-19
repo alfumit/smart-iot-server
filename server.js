@@ -13,6 +13,7 @@ const handlers = fs.readdirSync(path.join(__dirname, 'handlers')).sort();
 handlers.forEach((handler) => require('./handlers/' + handler).init(app));
 
 router.get('/', require('./routes/homepage').get);
+router.get('/register', require('./routes/register').get);
 router.get('/main', async (ctx) => {
    ctx.body = `Hey this is the main page `;
 });
